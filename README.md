@@ -1,4 +1,4 @@
-## Requiriments
+## Requirements
 * Python 3.5
 * `pip install -r requirements.txt`
 
