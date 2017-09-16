@@ -47,7 +47,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     'todo',
-    'api-v1',
+    'api_v1',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
