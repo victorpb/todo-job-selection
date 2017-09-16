@@ -22,3 +22,14 @@ class TestGetTasksSucess(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, serializer.data)
+
+class TestCreateTasksSucess(TestCase):
+    
+    def test_index(self):
+        data = {'description': 'tasks'}
+        response = self.client.post('http://localhost:8000/todo-list/api/v1/tasks/', data=data)
+        tasks = Task.objects.get(description='tasks')
+        serializer = TaskSerializer(tasks)
+        import pdb; pdb.set_trace()
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data, serializer.data)
