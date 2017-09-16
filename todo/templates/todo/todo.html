@@ -22,15 +22,19 @@
                     </a>
                 </div>
 
-                <div class="col m8">
-                        <input type="text" v-model="task.description" v-on:keyup="edit = true" v-on:blur="edit = true" v-on:paste="edit = true" v-on:delete="edit = true" v-on:focus="edit = true">
+                <div class="col m1">
+                        <input type="number" pattern="/^[0-9]+$/" v-model="task.index" v-on:keyup="edit = true" v-on:blur="edit = true" v-on:paste="edit = true" v-on:delete="edit = true" v-on:focus="edit = true">
+                </div>
+
+                <div class="col m7">
+                    <input type="text" v-model="task.description" v-on:keyup="edit = true" v-on:blur="edit = true" v-on:paste="edit = true" v-on:delete="edit = true" v-on:focus="edit = true">
                 </div>
 
                 <div class="col m3">
                     <a v-on:click="deleteTask(index, task.id)" href="#">
                         <i class="material-icons right red-text text-darken-2 transparent">delete</i>
                     </a>
-                    <a v-on:click="editTask(task.id, task.description)" href="#" v-if="edit">
+                    <a v-on:click="editTask(task.id, task.description, task.index)" href="#" v-if="edit">
                         <i class="material-icons right green-text text-accent-3 transparent">save</i>
                     </a>
                 </div>

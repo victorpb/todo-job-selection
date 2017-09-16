@@ -14,7 +14,7 @@ class TaskList(APIView):
     List all tasks or create a new one
     """
     def get(self, request, format=None):
-        tasks = Task.objects.filter(deleted=False)
+        tasks = Task.objects.filter(deleted=False).order_by('index')
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data)
 
@@ -47,6 +47,5 @@ class TaskDetail(APIView):
 
     def delete(self, request, pk, format=None):
         task = self.get_object(pk)
-        task.deleted = True
-        task.save()
+        task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

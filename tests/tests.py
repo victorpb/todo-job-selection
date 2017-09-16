@@ -12,7 +12,7 @@ class TestUrlTodoIsAlive(TestCase):
 class TestGetTasksSucess(TestCase):
     def setUp(self):
         for i in range(1,3):
-            Task.objects.create(description='tasks {}'.format(i))
+            Task.objects.create(description='tasks {}'.format(i), index=i)
 
     def test_index(self):
         
@@ -26,7 +26,7 @@ class TestGetTasksSucess(TestCase):
 class TestCreateTasksSucess(TestCase):
     
     def test_index(self):
-        data = {'description': 'tasks'}
+        data = {'description': 'tasks','index':1}
         response = self.client.post('http://localhost:8000/todo-list/api/v1/tasks/', data=data)
         tasks = Task.objects.get(description='tasks')
         serializer = TaskSerializer(tasks)
@@ -36,7 +36,7 @@ class TestCreateTasksSucess(TestCase):
 
 class TestRenameTasksSucess(TestCase):
     def setUp(self):
-        self.create_task = Task.objects.create(description='tasks created')
+        self.create_task = Task.objects.create(description='tasks created', index=1)
         
     def test_index(self):
         data = {"description": "tasks rename"}
@@ -51,7 +51,7 @@ class TestRenameTasksSucess(TestCase):
 
 class TestMarkDoneTasksSucess(TestCase):
     def setUp(self):
-        self.create_task = Task.objects.create(description='tasks created')
+        self.create_task = Task.objects.create(description='tasks created', index=1)
         
     def test_index(self):
         data = {"done": True}
@@ -65,7 +65,7 @@ class TestMarkDoneTasksSucess(TestCase):
 
 class TestMarkDeletedTasksSucess(TestCase):
     def setUp(self):
-        self.create_task = Task.objects.create(description='tasks created')
+        self.create_task = Task.objects.create(description='tasks created', index=1)
         
     def test_index(self):
         
@@ -73,6 +73,6 @@ class TestMarkDeletedTasksSucess(TestCase):
         
         response = self.client.delete( url, content_type='application/json')
         serializer = TaskSerializer(self.create_task)
-        task = Task.objects.get(pk=self.create_task.id)
+        task = Task.objects.filter(pk=self.create_task.id)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(task.deleted, True)
+        assert task.count() == 0

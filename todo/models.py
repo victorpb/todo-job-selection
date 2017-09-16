@@ -10,6 +10,7 @@ class Task(models.Model):
     done = models.BooleanField(default=False)
     deleted = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
+    index = models.IntegerField(unique=True)
 
     def __str__(self):
         """
