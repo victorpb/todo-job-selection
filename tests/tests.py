@@ -43,8 +43,36 @@ class TestRenameTasksSucess(TestCase):
         url = 'http://localhost:8000/todo-list/api/v1/tasks/{}/'.format(self.create_task.id)
         
         response = self.client.put( url, data=json.dumps(data), content_type='application/json')
-        tasks = Task.objects.get(description='tasks rename')
+        
         serializer = TaskSerializer(self.create_task)
         
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data.get('description'), data['description'])
+
+class TestMarkDoneTasksSucess(TestCase):
+    def setUp(self):
+        self.create_task = Task.objects.create(description='tasks created')
+        
+    def test_index(self):
+        data = {"done": True}
+        url = 'http://localhost:8000/todo-list/api/v1/tasks/{}/'.format(self.create_task.id)
+        
+        response = self.client.put( url, data=json.dumps(data), content_type='application/json')
+        serializer = TaskSerializer(self.create_task)
+        
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data.get('done'), True)
+
+class TestMarkDeletedTasksSucess(TestCase):
+    def setUp(self):
+        self.create_task = Task.objects.create(description='tasks created')
+        
+    def test_index(self):
+        
+        url = 'http://localhost:8000/todo-list/api/v1/tasks/{}/'.format(self.create_task.id)
+        
+        response = self.client.delete( url, content_type='application/json')
+        serializer = TaskSerializer(self.create_task)
+        task = Task.objects.get(pk=self.create_task.id)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(task.deleted, True)
