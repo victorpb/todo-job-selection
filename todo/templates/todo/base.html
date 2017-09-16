@@ -11,13 +11,14 @@
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{% static 'css/materialize.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" />
     <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" />
     {% block css %}{% endblock %}
 
     <!-- JS -->
-    <script src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
-    <script src="{% static 'js/materialize.min.js' %}"></script>
-    <script src="https://unpkg.com/vue"></script>
+    <script src="{% static '/vendor/jquery-1.11.2.min.js' %}"></script>
+    <script src="{% static '/vendor/materialize.min.js' %}"></script>
+    <script src="{% static '/vendor/vue.min.js' %}"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 </head>
