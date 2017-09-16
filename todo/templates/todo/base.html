@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="pt_br">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="author" content="Bruno Soares" />
+    <title>{% block page-title %}Sthima{% endblock %}</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}">
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'css/materialize.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" />
+    {% block css %}{% endblock %}
+
+    <!-- JS -->
+    <script src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+<body class="grey lighten-3">
+
+{% block header %}
+<header>
+    <nav class="deep-purple  lighten-5">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo center">
+                <img src="{% static 'images/logo.png' %}" alt="Sthima Brand Logo" />
+            </a>
+        </div>
+    </nav>
+</header>
+{% endblock %}
+
+{% block main %}
+<main>
+    <div class="container">
+        {% block main-content %}{% endblock %}
+    </div>
+</main>
+{% endblock %}
+
+{% block footer %}
+<footer>
+</footer>
+{% endblock %}
+
+{% block js-body %}{% endblock %}
+</body>
+</html>
