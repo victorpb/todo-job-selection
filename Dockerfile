@@ -18,6 +18,6 @@ ADD supervisor.conf /etc/supervisor/conf.d
 RUN pip3 install -r ./requirements.txt
 RUN pip3 install gunicorn
 RUN rm /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
-
+RUN /etc/init.d/supervisor start myproject
 RUN service nginx restart
 EXPOSE 80
